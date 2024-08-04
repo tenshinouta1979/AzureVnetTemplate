@@ -1,0 +1,61 @@
+#Create peering from A to B
+az network vnet peering create \
+--name SalesVNet-To-MarketingVNet \
+--remote-vnet MarketingVNet \
+--resource-group "[sandbox resource group name]" \
+--vnet-name SalesVNet \
+--allow-vnet-access
+
+#Create peering from B to A
+az network vnet peering create \
+--name MarketingVNet-To-SalesVNet \
+--remote-vnet SalesVNet \
+--resource-group "[sandbox resource group name]" \
+--vnet-name MarketingVNet \
+--allow-vnet-access
+
+#Create peering from A to C
+az network vnet peering create \
+--name ResearchVNet-To-MarketingVNet \
+--remote-vnet MarketingVNet \
+--resource-group "[sandbox resource group name]" \
+--vnet-name ResearchVNet \
+--allow-vnet-access
+
+#Create peering C to A   
+az network vnet peering create \
+--name MarketingVNet-To-ResearchVNet \
+--remote-vnet ResearchVNet \
+--resource-group "[sandbox resource group name]" \
+--vnet-name MarketingVNet \
+--allow-vnet-access
+
+#Display created peering
+az network vnet peering list \
+--resource-group "[sandbox resource group name]" \
+--vnet-name SalesVNet \
+--query "[].{Name:name, Resource:resourceGroup, PeeringState:peeringState, AllowVnetAccess:allowVirtualNetworkAccess}"\
+--output table
+
+az network vnet peering list \
+--resource-group "[sandbox resource group name]" \
+--vnet-name ResearchVNet \
+--query "[].{Name:name, Resource:resourceGroup, PeeringState:peeringState, AllowVnetAccess:allowVirtualNetworkAccess}"\
+--output table
+
+az network vnet peering list \
+--resource-group "[sandbox resource group name]" \
+--vnet-name MarketingVNet \
+--query "[].{Name:name, Resource:resourceGroup, PeeringState:peeringState, AllowVnetAccess:allowVirtualNetworkAccess}"\
+--output table
+
+#Check effective routes
+az network nic show-effective-route-table \
+--resource-group "[sandbox resource group name]" \
+--name SalesVMVMNic \
+--output table
+
+az network nic show-effective-route-table \
+--resource-group "[sandbox resource group name]" \
+--name MarketingVMVMNic \
+--output table

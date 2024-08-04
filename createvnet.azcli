@@ -1,0 +1,25 @@
+#Create vnet
+az network vnet create \
+--resource-group "learn-7afee60a-afa8-456d-bcac-942a017398ab" \
+--name SalesVNet \
+--address-prefixes 10.1.0.0/16 \
+--subnet-name Apps \
+--subnet-prefixes 10.1.1.0/24 \
+--location northeurope
+
+az network vnet create \
+--resource-group "learn-7afee60a-afa8-456d-bcac-942a017398ab" \
+--name MarketingVNet \
+--address-prefixes 10.2.0.0/16 \
+--subnet-name Apps \
+--subnet-prefixes 10.2.1.0/24 \
+--location northeurope
+
+az network vnet create \
+--resource-group "learn-7afee60a-afa8-456d-bcac-942a017398ab" \
+--name ResearchVNet \
+--address-prefixes 10.3.0.0/16 \
+--subnet-name Data \
+--subnet-prefixes 10.3.1.0/24 \
+--location westeurope
+
