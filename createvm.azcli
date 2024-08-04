@@ -1,3 +1,6 @@
+#this script creates VMs
+#passwords has to be set the way that system requires
+#"!" cannot be used, length has to be 12 or more
 az vm create \
     --resource-group "learn-7afee60a-afa8-456d-bcac-942a017398ab" \
     --no-wait \

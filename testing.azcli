@@ -1,0 +1,13 @@
+#VMs
+az vm list \
+    --resource-group "learn-7afee60a-afa8-456d-bcac-942a017398ab" \
+    --query "[*].{Name:name, PrivateIP:privateIps, PublicIP:publicIps}" \
+    --show-details \
+    --output table
+
+#To test connections from VM_A to VM_B
+#we make ssh connection using SSH to connect to the public IP address of SalesVM
+ssh -o StrictHostKeyChecking=no azureuser@<VM_A public IP>
+
+#Next, we are making a private connection from VM_A to VM_B using private IP
+ssh -o StrictHostKeyChecking=no azureuser@<VM_B private IP>
